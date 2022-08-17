@@ -9,6 +9,6 @@
     "outDir": "dist",
     "strict": true,
     "sourceMap": true,
-    "target": "ES5"
+    "target": "ESNext"
   }
 }

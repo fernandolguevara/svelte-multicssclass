@@ -14,7 +14,7 @@ const expandCssClasses = (src: string, classes: string[]) =>
     return src.replace(c, _classes.join(' '));
   }, src);
 
-export default function multicssclass(): Plugin {
+export const multicssclass = (): Plugin => {
   return {
     name: 'vite:svelte-multicssclass',
     enforce: 'pre',
@@ -29,4 +29,6 @@ export default function multicssclass(): Plugin {
       }
     },
   };
-}
+};
+
+export default multicssclass;
