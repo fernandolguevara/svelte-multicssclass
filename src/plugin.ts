@@ -6,6 +6,8 @@ const expandCssClasses = (src: string, classes: string[]) =>
     const _class: string = c.replace('class:', '');
     const _classes = _class
       .substring(0, _class.indexOf('='))
+      .replace(/,/g, '|')
+      .replace(/;/g, '|')
       .split('|')
       .map((x) => `class:${x}${attrValue}`);
 

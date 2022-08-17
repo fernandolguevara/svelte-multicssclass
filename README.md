@@ -7,14 +7,21 @@ before:
   class:text-gray-500={isValid}
   class:bg-gray-50={isValid}
   class:border-gray-300={isValid}>
-    First name
+    text
   </label>
 ```
 
 after:
 
 ```html
-  <label class:text-gray-500|bg-gray-50|border-gray-300={isValid}>First name</label>
+  <label class:text-gray-500;bg-gray-50;border-gray-300={isValid}>text</label>
+<!-- OR -->
+
+  <label class:text-gray-500,bg-gray-50,border-gray-300={isValid}>text</label>
+
+<!-- OR -->
+
+  <label class:text-gray-500|bg-gray-50|border-gray-300={isValid}>text</label>
 ```
 
 &nbsp;
