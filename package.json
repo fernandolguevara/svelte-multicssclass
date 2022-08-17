@@ -1,0 +1,27 @@
+{
+  "name": "svelte-multicssclass",
+  "version": "0.0.1",
+  "description": "svelte preprocessor for multiple conditional css classes",
+  "author": "Fernando López Guevara",
+  "license": "MIT",
+  "repository": "fernandolguevara/svelte-multicssclass",
+  "main": "dist/plugin.js",
+  "files": [
+    "src",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "prepare": "pnpm build"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.6",
+    "prettier": "^2.7.1",
+    "typescript": "^4.7.4",
+    "vite": "^3.0.8"
+  },
+  "keywords": [
+    "vite",
+    "vite-plugin"
+  ]
+}
