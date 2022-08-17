@@ -1,5 +1,4 @@
 {
-  "include": ["src", "test"],
   "compilerOptions": {
     "declaration": true,
     "esModuleInterop": true,
