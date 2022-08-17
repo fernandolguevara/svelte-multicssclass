@@ -25,7 +25,7 @@ after:
 // vite.config.js
 
 import { sveltekit } from '@sveltejs/kit/vite';
-import multicssclass from 'svelte-multicssclass';
+import { multicssclass } from 'svelte-multicssclass';
 
 
 /** @type {import('vite').UserConfig} */
