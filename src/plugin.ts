@@ -1,5 +1,3 @@
-import type { Plugin } from 'vite';
-
 const classRegex = /class:(\S+)=(?:(['"])([\s\S]*?)\2|([^\s>]+))/g;
 
 const expandCssClasses = (src: string, classes: string[]) =>
@@ -11,10 +9,10 @@ const expandCssClasses = (src: string, classes: string[]) =>
       .split('|')
       .map((x) => `class:${x}${attrValue}`);
 
-    return src.replace(c, _classes.join(' '));
+    return s.replace(c, _classes.join(' '));
   }, src);
 
-export const multicssclass = (): Plugin => {
+export const multicssclass = () => {
   return {
     name: 'vite:svelte-multicssclass',
     enforce: 'pre',
