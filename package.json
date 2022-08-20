@@ -1,6 +1,6 @@
 {
   "name": "svelte-multicssclass",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "svelte preprocessor for multiple conditional css classes",
   "author": "Fernando López Guevara",
   "license": "MIT",

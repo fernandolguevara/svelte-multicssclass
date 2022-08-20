@@ -97,3 +97,55 @@ test('plugin with sep', () => {
     expect(code).toBe(outHtml);
   }
 });
+
+test('plugin not operation', () => {
+  const html = `
+<label
+  class:text-blue-500@@text-red-500={isValid}>
+  text
+</label>
+<label
+  class:text-yellow-500@@text-black-500={isValid}>
+  text
+</label>
+`;
+
+  const plugin = multicssclass({ sep: '@' });
+
+  if (plugin?.transform) {
+    const out = plugin.transform(html, 'test.svelte');
+    const code = out?.code!;
+    const outHtml = `
+<label
+  class:text-blue-500={isValid} class:text-red-500={!(isValid)}>
+  text
+</label>
+<label
+  class:text-yellow-500={isValid} class:text-black-500={!(isValid)}>
+  text
+</label>
+`;
+
+    expect(code?.length).toBeGreaterThan(0);
+    expect(code).toBe(outHtml);
+  }
+});
+
+test('plugin not operation syntax-error', () => {
+  const html = `
+<label
+  class:text-blue-500@@text-red-500@@syntax-error={isValid}>
+  text
+</label>
+`;
+
+  const plugin = multicssclass({ sep: '@' });
+
+  if (plugin?.transform) {
+    try {
+      plugin.transform(html, 'test.svelte');
+    } catch (err) {
+      expect(err).toBeDefined();
+    }
+  }
+});
