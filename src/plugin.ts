@@ -1,4 +1,4 @@
-const classRegex = /class:(\S+)=(?:(['"])([\s\S]*?)\2|([^\s>]+))/g;
+const classRegex = /class:(\S[^=]+)={1}/g;
 
 const splitter = '|';
 
@@ -11,11 +11,31 @@ const expand = (classes: string, v: string) =>
 const expandCssClasses = (src: string, classes: string[], sep?: string) => {
   const separators = sep ? [sep] : [';', ','];
 
-  return classes.reduce((s, c) => {
-    const attrValue = c.substring(c.indexOf('='));
-    const _class: string = c.replace('class:', '');
+  if (!classes?.length) {
+    return src;
+  }
 
-    let _classesList = _class.substring(0, _class.indexOf('='));
+  let _class, cursor, j, i = 0, result = src, work = src, l;
+
+  do {
+    _class = classes[i];
+    l = work.length;
+    cursor = work.indexOf(_class) + _class.length;
+
+    for (j = cursor; j < l; j++) {
+      const char = work[j];
+      const next = work[j + 1];
+      if (char === "}") {
+        j++
+        break;
+      } else if (char === "\"" && next === "}") {
+        j += 2;
+        break;
+      }
+    }
+
+    const attrValue = work.substring(cursor - 1, j);
+    const _classesList: string = _class.replace('class:', '').replace("=", '');
 
     const replaced = separators.reduce(
       (ctx, sep) => ctx.replaceAll(sep, splitter),
@@ -29,14 +49,15 @@ const expandCssClasses = (src: string, classes: string[], sep?: string) => {
 
     if (badSyntax?.length) {
       throw SyntaxError(
-        `${c} invalid not operator. Ex: class:when-true${
-          sep?.length ? sep : '(;; ,, ||)'
+        `${_class} invalid not operator. Ex: class:when-true${sep?.length ? sep : '(;; ,, ||)'
         }when-false={cond}`
       );
     }
 
+    i++;
+    work = work.substring(j);
     if (!trueClasses?.length && !falseClasses?.length) {
-      return s;
+      continue;
     }
 
     let _classes, notAttrValue;
@@ -49,8 +70,10 @@ const expandCssClasses = (src: string, classes: string[], sep?: string) => {
       _classes = _classes.concat(expand(falseClasses, notAttrValue));
     }
 
-    return s.replace(c, _classes.join(' '));
-  }, src);
+    result = result.replace(_class + attrValue.substring(1), _classes.join(' '));
+  } while (classes.length > i);
+
+  return result;
 };
 
 export const multicssclass = (options?: { sep?: string }) => {

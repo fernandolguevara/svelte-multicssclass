@@ -149,3 +149,30 @@ test('plugin not operation syntax-error', () => {
     }
   }
 });
+
+test('compex', () => {
+  const html = `
+<a
+href={item.link}
+class:border-indigo-500;;text-gray-900={
+  cont(arg, arg1)
+  ||
+  otherCond(arg, arg1)
+}
+class="inline-flex items-center px-1 pt-1 border-b-2 text-normal font-medium"
+aria-current="page"
+>
+{item.label}
+</a>
+`
+  const plugin = multicssclass();
+
+  if (plugin?.transform) {
+    const out = plugin.transform(html, 'test.svelte');
+    const code = out?.code!;
+
+    expect(code?.length).toBeGreaterThan(0);
+    expect(code).toContain("class:border-indigo-500")
+    expect(code).toContain("class:text-gray-900={!(")
+  }
+})
