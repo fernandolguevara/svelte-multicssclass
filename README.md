@@ -33,6 +33,18 @@ alter:
 
 ### Usage
 
+```
+  - choose a separator char ;  ,  | or configure your own multicssclass({ sep: '@' })
+  - write your classes using the sep 
+      <element class:class1;class2;class3={condition} />
+      Custom sep
+      <element class:class1@class2@class3={condition} />
+  - two separators for toggle 
+      <element class:true-class1;true-class2;;false-class1;false-class2={condition} />
+      Custom sep 
+      <element class:true-class1@true-class2@@false-class1@false-class2={condition} />
+```
+
 ```sh
 npm i -D svelte-multicssclass
 ```
