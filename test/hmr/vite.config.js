@@ -1,5 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { multicssclass } from '../../src/plugin';
+import { multicssclass } from '../../dist/src/plugin';
 import UnoCSS from 'unocss/vite';
 import { defineConfig } from 'vite';
 import presetUno from '@unocss/preset-uno';
