@@ -6,7 +6,7 @@
 
 &nbsp;
 
-before:
+Before:
 
 ```html
 <label
@@ -21,7 +21,7 @@ before:
 </label>
 ```
 
-alter:
+After:
 
 ```html
 <label
