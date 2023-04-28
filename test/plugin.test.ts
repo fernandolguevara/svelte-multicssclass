@@ -164,7 +164,7 @@ aria-current="page"
 >
 {item.label}
 </a>
-`
+`;
   const plugin = multicssclass();
 
   if (plugin?.transform) {
@@ -172,7 +172,7 @@ aria-current="page"
     const code = out?.code!;
 
     expect(code?.length).toBeGreaterThan(0);
-    expect(code).toContain("class:border-indigo-500")
-    expect(code).toContain("class:text-gray-900={!(")
+    expect(code).toContain('class:border-indigo-500');
+    expect(code).toContain('class:text-gray-900={!(');
   }
-})
+});
